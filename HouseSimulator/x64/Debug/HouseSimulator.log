@@ -1,0 +1,7 @@
+﻿  BaseWindowController.cpp
+D:\Visual Studio Projects\HouseSimulator\HouseSimulator\BaseWindowController.cpp(76,1): warning C4312: '型キャスト': 'int' からより大きいサイズの 'HMENU' へ変換します。
+  main.cpp
+  TitleWindowController.cpp
+  コードを生成中...
+MSVCRTD.lib(exe_main.obj) : error LNK2019: 未解決の外部シンボル main が関数 "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) で参照されました
+D:\Visual Studio Projects\HouseSimulator\x64\Debug\HouseSimulator.exe : fatal error LNK1120: 1 件の未解決の外部参照
