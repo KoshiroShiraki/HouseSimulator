@@ -37,9 +37,9 @@ public:
 
 protected:
 	HRESULT CreateMainWindow(LPCWSTR className, LPCWSTR windowName); //継承クラスはそれぞれ必ずm_hwndハンドルに紐づいた一つのメインウィンドウを持つ
-	HRESULT CreateButton(HWND hBtn, LPCWSTR text, int offsetX, int offsetY, int width, int height, int btnID); //ボタンを生成する
-	HRESULT CreateComboBox(HWND hCb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int cbID); //コンボボックスを生成する
-	HRESULT CreateListBox(HWND hLb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int lbID); //リストボックスを生成する
+	HRESULT CreateButton(HWND &hBtn, LPCWSTR text, int offsetX, int offsetY, int width, int height, int btnID); //ボタンを生成する
+	HRESULT CreateComboBox(HWND &hCb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int cbID); //コンボボックスを生成する
+	HRESULT CreateListBox(HWND &hLb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int lbID); //リストボックスを生成する
 	void DeleteWindow(); //ウィンドウの削除とクラスの登録解除
 
 public:

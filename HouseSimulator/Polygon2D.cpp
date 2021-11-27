@@ -3,18 +3,11 @@
 
 Polygon2D::Polygon2D() {
 	initParam();
-	//éläpå`
-	m_localVertices.resize(4);
-	m_worldVertices.resize(4);
-	
-	m_worldVertices[0].x = m_localVertices[0].x = -50.0f; m_worldVertices[0].y = m_localVertices[0].y = 100.0f;
-	m_worldVertices[1].x = m_localVertices[1].x = 50.0f; m_worldVertices[1].y = m_localVertices[1].y = 50.0f;
-	m_worldVertices[2].x = m_localVertices[2].x = 100.0f; m_worldVertices[2].y = m_localVertices[2].y = -50.0f;
-	m_worldVertices[3].x = m_localVertices[3].x = -50.0f; m_worldVertices[3].y = m_localVertices[3].y = -50.0f;
 }
 
 Polygon2D::Polygon2D(int type) {
 	initParam();
+	setPolygon(type);
 }
 
 Polygon2D::Polygon2D(std::vector<POINT>* vertices) {
@@ -44,5 +37,20 @@ void Polygon2D::rotate(double deg) {
 	for (int i = 0; i < m_localVertices.size(); i++) {
 		m_worldVertices[i].x = m_localVertices[i].x * cos(deg * PI / 180.0) - m_localVertices[i].y * sin(deg * PI / 180.0);
 		m_worldVertices[i].x = m_localVertices[i].y * sin(deg * PI / 180.0) + m_localVertices[i].y * cos(deg * PI / 180.0);
+	}
+}
+
+void Polygon2D::setPolygon(int type) {
+	switch (type) {
+	case room1:
+		break;
+	case room2:
+		break;
+	case room3:
+		break;
+	case room4:
+		break;
+	case hall:
+		break;
 	}
 }

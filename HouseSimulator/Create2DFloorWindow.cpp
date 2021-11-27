@@ -6,7 +6,7 @@ Create2DFloorWindow::Create2DFloorWindow() {
 }
 
 Create2DFloorWindow::Create2DFloorWindow(HINSTANCE hInstance, int window_width, int window_height) : BaseWindowController(hInstance, window_width, window_height) {
-
+	
 }
 
 Create2DFloorWindow::~Create2DFloorWindow() {
@@ -22,6 +22,10 @@ HRESULT Create2DFloorWindow::InitWindow() {
 	SetArea(); //領域設定
 
 	if (FAILED(CreateChildWindow())) { //子ウィンドウ(ボタンとかドロップダウンボックスとか)作成
+		return S_FALSE;
+	}
+
+	if (FAILED(SetDefaultPolygonsText())) { //テキストの設定
 		return S_FALSE;
 	}
 	return S_OK;
@@ -78,7 +82,22 @@ HRESULT Create2DFloorWindow::CreateChildWindow() {
 	if (FAILED(CreateListBox(m_hLb[1], NULL, LBoffsetX + m_editArea1_width / 220, CBoffsetY, (m_editArea1_width - 2 * (m_editArea1_width / 100)) / 2, m_editArea1_height / 2, LB_FLOOR_OBJS))) {
 		return S_FALSE;
 	}
+	int LBoffsetY = CBoffsetY + m_editArea1_height / 2;
+	//ポリゴン作成/消去ボタンの配置
+	if (FAILED(CreateButton(m_hBtnND[0], L"add", m_rc_editArea1.left + m_editArea1_width / 2, LBoffsetY, m_editArea1_width / 5, m_editArea1_height / 50, BTN_POLYGON_ADD))) {
+		return S_FALSE;
+	}if (FAILED(CreateButton(m_hBtnND[0], L"delete", m_rc_editArea1.left + m_editArea1_width / 2 + m_editArea1_width / 5, LBoffsetY, m_editArea1_width / 5, m_editArea1_height / 50, BTN_POLYGON_ADD))) {
+		return S_FALSE;
+	}
 	return S_OK;
+}
+
+HRESULT Create2DFloorWindow::SetDefaultPolygonsText() {
+	for (int i = 0; i < DefaultPolygons.size(); i++) {
+		if (SendMessage(m_hLb[1], LB_ADDSTRING, 0, (LPARAM)DefaultPolygons[i].data()) == LB_ERR) {
+			return errorMessage(L"Failed to SetDefaultPolygonsText()");
+		}
+	}
 }
 
 void Create2DFloorWindow::DrawArea(HDC hdc, PAINTSTRUCT ps) {
@@ -118,6 +137,7 @@ LRESULT Create2DFloorWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 
 	switch (uMsg) {
 	case WM_CREATE:
+		SetDefaultPolygonsText();
 		return 0;
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);

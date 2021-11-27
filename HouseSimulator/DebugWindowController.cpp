@@ -41,7 +41,7 @@ LRESULT DebugWindowController::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, L
 
 	switch (uMsg) {
 	case WM_CREATE:
-		//
+
 		return 0;
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);

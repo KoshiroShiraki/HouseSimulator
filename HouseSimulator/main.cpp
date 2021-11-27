@@ -6,6 +6,8 @@
 RECT monitors[MAX_MONITORCNT]; //モニター数(上限 : MAX_MONITORCNT)
 int monitorCnt = 0; //モニターカウント
 
+int a;
+
 //モニタ情報を得るためのコールバック関数(EnumDisplayMonitorsで呼ばれる)
 BOOL CALLBACK MonitorEnumProc(HMONITOR hmon, HDC hdc, LPRECT rect, LPARAM lParam) {
 	if (monitorCnt < MAX_MONITORCNT) { //MAX_MONITORCNT以上に割り当てられるモニターは無視

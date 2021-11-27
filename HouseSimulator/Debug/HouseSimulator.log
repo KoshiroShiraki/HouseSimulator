@@ -1,10 +1,2 @@
-﻿  Create2DFloorWindow.cpp
-D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(101,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(102,79): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
-D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(103,81): warning C4244: '=': 'double' から 'LONG' への変換です。データが失われる可能性があります。
-D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(115,7): warning C4101: 'pen': ローカル変数は 1 度も使われていません。
-  TitleWindowController.cpp
-  main.cpp
-  コードを生成中...
-D:\Visual Studio Projects\HouseSimulator\HouseSimulator\TitleWindowController.cpp(29): warning C4715: 'TitleWindowController::InitWindow': 値を返さないコントロール パスがあります。
+﻿  BaseWindowController.cpp
   HouseSimulator.vcxproj -> D:\Visual Studio Projects\HouseSimulator\Debug\HouseSimulator.exe

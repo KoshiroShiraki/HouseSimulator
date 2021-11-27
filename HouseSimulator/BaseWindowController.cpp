@@ -71,7 +71,7 @@ HRESULT BaseWindowController::CreateMainWindow(LPCWSTR className, LPCWSTR window
 	return S_OK;
 }
 
-HRESULT BaseWindowController::CreateButton(HWND hbtn, LPCWSTR text, int offsetX, int offsetY, int width,int height, int btnID) {
+HRESULT BaseWindowController::CreateButton(HWND &hbtn, LPCWSTR text, int offsetX, int offsetY, int width,int height, int btnID) {
 	hbtn = CreateWindow(
 		L"BUTTON",
 		text,
@@ -89,7 +89,7 @@ HRESULT BaseWindowController::CreateButton(HWND hbtn, LPCWSTR text, int offsetX,
 	return S_OK;
 }
 
-HRESULT BaseWindowController::CreateComboBox(HWND hCb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int cbID) {
+HRESULT BaseWindowController::CreateComboBox(HWND &hCb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int cbID) {
 	hCb = CreateWindow(
 		L"COMBOBOX",
 		text,
@@ -107,11 +107,11 @@ HRESULT BaseWindowController::CreateComboBox(HWND hCb, LPCWSTR text, int offsetX
 	return S_OK;
 }
 
-HRESULT BaseWindowController::CreateListBox(HWND hLb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int lbID) {
+HRESULT BaseWindowController::CreateListBox(HWND &hLb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int lbID) {
 	hLb = CreateWindow(
 		L"LISTBOX",
 		text,
-		WS_CHILD | WS_VISIBLE | LBS_STANDARD,
+		WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | LBS_NOTIFY,
 		offsetX, offsetY,
 		width, height,
 		m_hwnd,
@@ -122,6 +122,7 @@ HRESULT BaseWindowController::CreateListBox(HWND hLb, LPCWSTR text, int offsetX,
 	if (!hLb) {
 		return errorMessage(L"Failed to Create ListBox");
 	}
+	
 	return S_OK;
 }
 

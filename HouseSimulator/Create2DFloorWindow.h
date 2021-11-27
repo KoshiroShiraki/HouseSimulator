@@ -8,6 +8,8 @@
 #define BTN_FLOOR_SUB 2
 #define LB_FLOOR_OBJLIST 3
 #define LB_FLOOR_OBJS 4
+#define BTN_POLYGON_ADD 5
+#define BTN_POLYGON_DELETE 6
 
 class Create2DFloorWindow : public BaseWindowController {
 public:
@@ -30,7 +32,8 @@ private:
 	
 	HWND m_hCb; //階数選択用コンボボックス
 	HWND m_hBtn[2]; //階数増減用ボタン([0]:増加, [1]:減少)
-	HWND m_hLb[3];
+	HWND m_hBtnND[2]; //ポリゴン作成/消去ボタン([0]作成, [1]消去)
+	HWND m_hLb[3]; //ポリゴン列挙用リスボックス([0]:配置済み, [1]:配置可能)
 
 	Camera2D m_camera; //カメラ
 
@@ -44,6 +47,7 @@ public:
 	HRESULT InitWindow() override;
 	void SetArea();
 	HRESULT CreateChildWindow() override;
+	HRESULT SetDefaultPolygonsText();
 	void DrawArea(HDC hdc, PAINTSTRUCT ps); //ウィンドウプロシージャで実際に領域の描画を行う
 	void DrawPolygon(HDC hdc, PAINTSTRUCT ps, Polygon2D& polygon);
 };
