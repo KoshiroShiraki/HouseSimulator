@@ -33,6 +33,9 @@ void Create2DFloorWindow::SetArea() {
 	m_rc_paintArea.left = m_client_width / 50;
 	m_rc_paintArea.bottom = m_client_height * 9 / 10;
 	m_rc_paintArea.right = m_client_width * 7 / 10;
+	//描画領域の幅/高さ
+	m_paintArea_width = m_rc_paintArea.right - m_rc_paintArea.left;
+	m_paintArea_height = m_rc_paintArea.bottom - m_rc_paintArea.top;
 	//編集領域1の設定
 	m_rc_editArea1.top = m_rc_paintArea.top;
 	m_rc_editArea1.left = m_rc_paintArea.right + m_client_width / 50;
@@ -91,14 +94,26 @@ void Create2DFloorWindow::DrawArea(HDC hdc, PAINTSTRUCT ps) {
 	Rectangle(hdc, m_rc_editArea2.left, m_rc_editArea2.top, m_rc_editArea2.right, m_rc_editArea2.bottom);
 }
 
+void Create2DFloorWindow::DrawPolygon(HDC hdc, PAINTSTRUCT ps, Polygon2D& polygon) {
+	//カメラ座標に変換
+	std::vector<POINT> dest;
+	dest.resize(polygon.m_worldVertices.size());
+	for (int i = 0; i < polygon.m_worldVertices.size(); i++) {
+		dest[i].x = (polygon.m_worldVertices[i].x + (double)m_paintArea_width / 2.0 - m_camera.pos.x);
+		dest[i].y = (-polygon.m_worldVertices[i].y + (double)m_paintArea_height / 2.0 + m_camera.pos.y);
+	}
+	Polygon(hdc, dest.data(), dest.size());
+}
+
 LRESULT Create2DFloorWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	//Windowsの描画インターフェース(GDI)
 	HDC hdc;
 	PAINTSTRUCT ps;
 	//GDIオブジェクト
-	HRGN; //リージョン : 描画クリップ領域の指定
+	HRGN hrgn; //リージョン : 描画クリップ領域の指定
+	hrgn = CreateRectRgnIndirect(&m_rc_paintArea);
 	HPEN pen; //ペン
-	
+
 	Polygon2D unko;
 
 	switch (uMsg) {
@@ -107,9 +122,18 @@ LRESULT Create2DFloorWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
 
-		DrawArea(hdc, ps); //編集領域の描画 
+		DrawArea(hdc, ps); //編集領域の描画
+		
+		SelectClipRgn(hdc, hrgn); //描画領域のみにポリゴン描画するため、リージョンでクリップ
+		//DrawPolygon(hdc, ps); //ポリゴンの描画
 		
 		EndPaint(hwnd, &ps);
+		return 0;
+
+	case WM_KEYDOWN:
+
+		//ウィンドウ再描画(WM_PAINTの強制呼び出し)
+		InvalidateRect(hwnd, NULL, TRUE);
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);

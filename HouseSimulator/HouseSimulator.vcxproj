@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Polygon2D.cpp" />
     <ClCompile Include="BaseWindowController.cpp" />
     <ClCompile Include="DebugWindowController.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="AppWindowHeaders.h" />
+    <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Polygon2D.h" />
     <ClInclude Include="BaseWindowController.h" />
     <ClInclude Include="Create2DFloorWindow.h" />
