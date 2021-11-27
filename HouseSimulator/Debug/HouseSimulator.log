@@ -1,4 +1,4 @@
 ﻿  Create2DFloorWindow.cpp
-D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(39,6): warning C4101: 'hdc': ローカル変数は 1 度も使われていません。
-D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(40,14): warning C4101: 'ps': ローカル変数は 1 度も使われていません。
+D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(99,6): warning C4091: '': 変数が何も宣言されていないときは、'HRGN__ *' の左辺を無視します。
+D:\Visual Studio Projects\HouseSimulator\HouseSimulator\Create2DFloorWindow.cpp(100,7): warning C4101: 'pen': ローカル変数は 1 度も使われていません。
   HouseSimulator.vcxproj -> D:\Visual Studio Projects\HouseSimulator\Debug\HouseSimulator.exe

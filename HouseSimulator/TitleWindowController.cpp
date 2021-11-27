@@ -22,21 +22,21 @@ TitleWindowController::~TitleWindowController() {
 HRESULT TitleWindowController::InitWindow() {
 	//メインウィンドウ生成
 	if (FAILED(CreateMainWindow(L"TITLE", L"TITLE"))) {
-		return errorMessage(L"Failed to CreateMainWindow");
+		return errorMessage(L"Failed to CreateMainWindow : TITLE");
 	}
 
-	//クライアント領域の取得
-	RECT rc;
-	GetClientRect(m_hwnd, &rc);
+	CreateChildWindow();
+}
 
+HRESULT TitleWindowController::CreateChildWindow() {
 	//ボタン生成
-	if (FAILED(CreateButton(m_hbtn[0], L"作成", 0, 0, rc.right / 3, rc.bottom, BTNID_START))) {
+	if (FAILED(CreateButton(m_hbtn[0], L"作成", 0, 0, m_client_width / 3, m_client_height, BTNID_START))) {
 		return errorMessage(L"Failed to CreateWindow : Button 1");
 	}
-	if (FAILED(CreateButton(m_hbtn[1], L"読み込み", rc.right / 3, 0, rc.right / 3, rc.bottom, BTNID_LOAD))) {
+	if (FAILED(CreateButton(m_hbtn[1], L"読み込み", m_client_width / 3, 0, m_client_width / 3, m_client_height, BTNID_LOAD))) {
 		return errorMessage(L"Failed to CreateWindow : Button 2");
 	}
-	if (FAILED(CreateButton(m_hbtn[2], L"終了", rc.right * 2 / 3, 0, rc.right / 3, rc.bottom, BTNID_END))) {
+	if (FAILED(CreateButton(m_hbtn[2], L"終了", m_client_width * 2 / 3, 0, m_client_width / 3, m_client_height, BTNID_END))) {
 		return errorMessage(L"Failed to CreateWindow : Button 3");
 	}
 	return S_OK;

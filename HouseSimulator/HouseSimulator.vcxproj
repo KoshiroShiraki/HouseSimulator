@@ -139,7 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Polygon2D.cpp" />
     <ClCompile Include="BaseWindowController.cpp" />
+    <ClCompile Include="DebugWindowController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Create2DFloorWindow.cpp" />
     <ClCompile Include="TitleWindowController.cpp" />
@@ -147,8 +149,10 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="AppWindowHeaders.h" />
+    <ClInclude Include="Polygon2D.h" />
     <ClInclude Include="BaseWindowController.h" />
     <ClInclude Include="Create2DFloorWindow.h" />
+    <ClInclude Include="DebugWindowController.h" />
     <ClInclude Include="TitleWindowController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

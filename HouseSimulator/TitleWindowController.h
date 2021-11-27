@@ -22,4 +22,5 @@ public :
 public:
 	virtual LRESULT WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override; //ウィンドウプロシージャ
 	HRESULT InitWindow() override;
+	HRESULT CreateChildWindow() override;
 };

@@ -20,6 +20,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//モニタ情報取得(ピクセル位置のみ)
 	EnumDisplayMonitors(NULL, NULL, MonitorEnumProc, NULL);
 
+	//デバッグディスプレイの表示
+#ifdef _DEBUG
+	DebugWindowController* dwc = new DebugWindowController(hInstance, monitors[0].right * 3 / 10, monitors[0].bottom * 9 / 10);
+	if (FAILED(dwc->InitWindow())) {
+		delete dwc;
+
+		return -1;
+	}
+	ShowWindow(dwc->m_hwnd, nCmdShow);
+#endif
+
 	//タイトルウィンドウの生成と表示
 	/*TitleWindowController* twc = new TitleWindowController(hInstance, monitors[0].right/2, monitors[0].bottom/5);
 	if (FAILED(twc->InitWindow())) {
@@ -52,6 +63,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//delete twc;
 	delete sfcw;
+	delete dwc;
 
 	return 1;
 }

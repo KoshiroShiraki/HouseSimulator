@@ -59,10 +59,19 @@ HRESULT BaseWindowController::CreateMainWindow(LPCWSTR className, LPCWSTR window
 		return errorMessage(L"Failed to CreateWindow : TitleWindow");
 	}
 
+	//ウィンドウの生成に成功したら、クライアント領域を取得
+	RECT rc = {};
+	if (!GetClientRect(m_hwnd, &rc)) {
+		return errorMessage(L"Failed to GetClientRect");
+	}
+	m_client_width = rc.right - rc.left;
+	m_client_height = rc.bottom - rc.top;
+	
+
 	return S_OK;
 }
 
-HRESULT BaseWindowController::CreateButton(HWND hbtn, LPCTSTR text, int offsetX, int offsetY, int width,int height, int btnID) {
+HRESULT BaseWindowController::CreateButton(HWND hbtn, LPCWSTR text, int offsetX, int offsetY, int width,int height, int btnID) {
 	hbtn = CreateWindow(
 		L"BUTTON",
 		text,
@@ -74,8 +83,45 @@ HRESULT BaseWindowController::CreateButton(HWND hbtn, LPCTSTR text, int offsetX,
 		m_hinst,
 		NULL
 	);
-	if (!hbtn) return S_FALSE;
+	if (!hbtn) {
+		return errorMessage(L"Failed to Create Button");
+	}
+	return S_OK;
+}
 
+HRESULT BaseWindowController::CreateComboBox(HWND hCb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int cbID) {
+	hCb = CreateWindow(
+		L"COMBOBOX",
+		text,
+		WS_CHILD | WS_VISIBLE | CBS_SORT | CBS_DROPDOWN,
+		offsetX, offsetY,
+		width, height,
+		m_hwnd,
+		(HMENU)cbID,
+		m_hinst,
+		NULL
+	);
+	if (!hCb) {
+		return errorMessage(L"Failed to Create ComboBox");
+	}
+	return S_OK;
+}
+
+HRESULT BaseWindowController::CreateListBox(HWND hLb, LPCWSTR text, int offsetX, int offsetY, int width, int height, int lbID) {
+	hLb = CreateWindow(
+		L"LISTBOX",
+		text,
+		WS_CHILD | WS_VISIBLE | LBS_STANDARD,
+		offsetX, offsetY,
+		width, height,
+		m_hwnd,
+		(HMENU)lbID,
+		m_hinst,
+		NULL
+	);
+	if (!hLb) {
+		return errorMessage(L"Failed to Create ListBox");
+	}
 	return S_OK;
 }
 
